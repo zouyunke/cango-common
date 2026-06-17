@@ -18,14 +18,14 @@
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 const TYPE_CLASSES_MAP = {
   'success': 'el-icon-success',
   'warning': 'el-icon-warning',
   'error': 'el-icon-error'
 }
 export default {
-  name: 'ElAlert',
+  name: 'cg-alert',
 
   props: {
     title: {
@@ -52,6 +52,9 @@ export default {
     showIcon: Boolean,
     center: Boolean
   },
+  emits: [
+    'close'
+  ],
 
   data () {
     return {

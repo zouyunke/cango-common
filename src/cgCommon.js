@@ -1,3 +1,3 @@
-import CgUI from './components'
+import CgUI from './index'
 
 export default CgUI

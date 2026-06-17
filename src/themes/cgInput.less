@@ -2,9 +2,21 @@
 
 .cg-input {
   background: @main-color;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid @line-main-color;
+  border-radius: 4px;
   & > .cg-input__content {
     width: 100%;
     display: block;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 28px 0 8px;
+    border: 0;
+    outline: none;
   }
   &.cg-component-size__large {
     height: @large;

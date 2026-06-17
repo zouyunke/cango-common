@@ -40,7 +40,7 @@ import Focus from '../../../mixins/focus'
 import Migrating from '../../../mixins/migrating'
 
 export default {
-  name: 'ElSwitch',
+  name: 'cg-switch',
   mixins: [Focus('input'), Migrating],
   inject: {
     elForm: {
@@ -48,7 +48,7 @@ export default {
     }
   },
   props: {
-    value: {
+    modelValue: {
       type: [Boolean, String, Number],
       default: false
     },
@@ -92,19 +92,23 @@ export default {
     },
     id: String
   },
+  emits: [
+    'update:modelValue',
+    'change'
+  ],
   data () {
     return {
       coreWidth: this.width
     }
   },
   created () {
-    if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
-      this.$emit('input', this.inactiveValue)
+    if (!~[this.activeValue, this.inactiveValue].indexOf(this.modelValue)) {
+      this.$emit('update:modelValue', this.inactiveValue)
     }
   },
   computed: {
     checked () {
-      return this.value === this.activeValue
+      return this.modelValue === this.activeValue
     },
     switchDisabled () {
       return this.disabled || (this.elForm || {}).disabled
@@ -119,9 +123,11 @@ export default {
     }
   },
   methods: {
-    handleChange (event) {
-      this.$emit('input', !this.checked ? this.activeValue : this.inactiveValue)
-      this.$emit('change', !this.checked ? this.activeValue : this.inactiveValue)
+    handleChange () {
+      const value = !this.checked ? this.activeValue : this.inactiveValue
+
+      this.$emit('update:modelValue', value)
+      this.$emit('change', value)
       this.$nextTick(() => {
         // set input's checked property
         // in case parent refuses to change component's value
