@@ -1,0 +1,55 @@
+@import './base/variable/variable.less';
+
+.el-alert {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: @font-normal-color;
+  background-color: @bg-light-color;
+}
+
+.el-alert.is-center {
+  justify-content: center;
+}
+
+.el-alert--success {
+  color: @auxiliary-success-color;
+  background-color: fade(@auxiliary-success-color, 10%);
+}
+
+.el-alert--warning {
+  color: @auxiliary-warning-color;
+  background-color: fade(@auxiliary-warning-color, 10%);
+}
+
+.el-alert--error {
+  color: @auxiliary-danger-color;
+  background-color: fade(@auxiliary-danger-color, 10%);
+}
+
+.el-alert__content {
+  flex: 1;
+}
+
+.el-alert__title {
+  display: block;
+  font-size: @font-samll-size;
+  line-height: 1.5;
+}
+
+.el-alert__title.is-bold {
+  font-weight: 700;
+}
+
+.el-alert__description {
+  margin: 4px 0 0;
+  font-size: @font-extraSmall-size;
+}
+
+.el-alert__closebtn {
+  float: right;
+  cursor: pointer;
+}

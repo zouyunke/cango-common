@@ -2,7 +2,7 @@
  * Show migrating guide in browser console.
  *
  * Usage:
- * import Migrating from 'element-ui/src/mixins/migrating';
+ * import Migrating from '@/mixins/migrating';
  *
  * mixins: [Migrating]
  *
@@ -22,20 +22,21 @@
 export default {
   mounted () {
     if (process.env.NODE_ENV === 'production') return
-    if (!this.$vnode) return
-    const { props = {}, events = {} } = this.getMigratingConfig()
-    const { data, componentOptions } = this.$vnode
-    const definedProps = data.attrs || {}
-    const definedEvents = componentOptions.listeners || {}
+    if (typeof this.getMigratingConfig !== 'function') return
 
-    for (let propName in definedProps) {
-      if (definedProps.hasOwnProperty(propName) && props[propName]) {
+    const { props = {}, events = {} } = this.getMigratingConfig()
+    const attrs = this.$attrs || {}
+
+    for (let propName in attrs) {
+      if (Object.prototype.hasOwnProperty.call(attrs, propName) && props[propName]) {
         console.warn(`[Element Migrating][${this.$options.name}][Attribute]: ${props[propName]}`)
       }
     }
 
-    for (let eventName in definedEvents) {
-      if (definedEvents.hasOwnProperty(eventName) && events[eventName]) {
+    for (let eventName in events) {
+      const listenerName = `on${eventName.charAt(0).toUpperCase()}${eventName.slice(1)}`
+
+      if (Object.prototype.hasOwnProperty.call(attrs, listenerName)) {
         console.warn(`[Element Migrating][${this.$options.name}][Event]: ${events[eventName]}`)
       }
     }

@@ -1,19 +1,11 @@
 import config from '../config'
 
 const CgUI = {
-  install (Vue) {
+  install (app) {
     config.forEach(item => {
-      Vue.use(item.component)
+      app.component(item.component.name, item.component)
     })
   }
 }
 
-let result = null
-try {
-  if (Vue) {
-    result = CgUI.install(Vue)
-  }
-} catch (err) {
-  result = CgUI
-}
-export default result
+export default CgUI

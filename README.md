@@ -1,21 +1,95 @@
-# common
+# cango-common
 
-> A Vue.js project
+Vue 3 component library for Cango common UI components.
 
-## Build Setup
+## Install
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+```bash
+npm install cango-common
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+The consuming project must install Vue 3:
+
+```bash
+npm install vue
+```
+
+## Usage
+
+### Full import
+
+```js
+import { createApp } from 'vue'
+import CgUI from 'cango-common'
+import 'cango-common/style.css'
+import App from './App.vue'
+
+createApp(App)
+  .use(CgUI)
+  .mount('#app')
+```
+
+```vue
+<template>
+  <cg-input v-model="value" />
+  <cg-alert title="Saved" type="success" />
+  <cg-switch v-model="enabled" />
+</template>
+```
+
+### Named imports
+
+```js
+import { createApp } from 'vue'
+import { CgInput, CgAlert, CgSwitch } from 'cango-common'
+import 'cango-common/style.css'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.component(CgInput.name, CgInput)
+app.component(CgAlert.name, CgAlert)
+app.component(CgSwitch.name, CgSwitch)
+app.mount('#app')
+```
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+The Vite dev server opens the local demo from `src/App.vue`.
+
+## Build
+
+```bash
+npm run build
+```
+
+Library output is written to `dist/`:
+
+- `dist/cango-common.es.js`
+- `dist/cango-common.umd.cjs`
+- `dist/style.css`
+
+Vue is declared as a peer dependency and is not bundled into the library.
+
+## Publish
+
+1. Make sure the package metadata in `package.json` is correct.
+2. Build and inspect the package:
+
+   ```bash
+   npm run build
+   npm run pack:dry
+   ```
+
+3. Publish to the configured npm registry:
+
+   ```bash
+   npm publish
+   ```
+
+`prepublishOnly` runs `npm run build` automatically before `npm publish`.
