@@ -10,7 +10,7 @@ export default [
     ]
   },
   js.configs.recommended,
-  ...pluginVue.configs['flat/recommended'],
+  ...pluginVue.configs['flat/essential'],
   {
     files: ['**/*.{js,vue}'],
     languageOptions: {

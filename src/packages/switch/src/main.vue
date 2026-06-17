@@ -123,7 +123,7 @@ export default {
     }
   },
   methods: {
-    handleChange (event) {
+    handleChange () {
       const value = !this.checked ? this.activeValue : this.inactiveValue
 
       this.$emit('update:modelValue', value)

@@ -17,6 +17,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/index.js'),
       name: 'CgUI',
       fileName: format => format === 'es' ? 'cango-common.es.js' : 'cango-common.umd.cjs',
+      cssFileName: 'style',
       formats: ['es', 'umd']
     },
     cssCodeSplit: false,
